@@ -1,0 +1,143 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
+<head>
+  <meta charset="utf-8" />
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
+
+  <title>
+  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  </title>
+
+  {% if page_description %}
+  <meta name="description" content="{{ page_description | escape }}" />
+  {% endif %}
+
+  <link rel="canonical" href="{{ canonical_url }}" />
+  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  {% include 'open-graph-tags' %}
+  {% include 'twitter-card' %}
+
+  {{ content_for_header }}
+
+  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+  {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+
+  <!--[if lt IE 9]>
+  {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
+  <![endif]-->
+
+  {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
+  {% if template contains 'customers' %}  
+  {{ 'customer_area.js'  | shopify_asset_url | script_tag }}
+  {% endif %}
+  
+  <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
+  {{ 'shopify_common.js'  | asset_url | script_tag }}
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  <script>jQuery('html').removeClass('no-js').addClass('js');</script>
+
+</head>
+
+<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="nav-logo mx-auto">
+            {% if template != 'index' %}
+            <a href="{{ shop.url }}" class=""><img src="{{ 'logo-inline.svg' | asset_url }}" title="logo" alt="CHROMA"></a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="cart-link col-md-3">
+          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+          {% if shop.customer_accounts_enabled %}
+            <div class="customer-links">
+              {% if customer %}
+                Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
+              {% comment %}
+              {% else %}
+                {{ 'Log in' | customer_login_link }}
+                {% if shop.customer_accounts_optional %}
+                or {{ 'Create an account' | customer_register_link }}
+                {% endif %}
+              {% endcomment %}
+              {% endif %}
+            </div>
+            {% endif %}
+        </div>
+      </div>
+    </div><!-- /.container -->
+  </nav>
+  {% comment %}
+    Note on checkout link: it is a good idea to avoid linking to /checkout directly because shops that use 
+    Paypal Express Checkout and/or Google Checkout have special checkout buttons on the /cart page. Also,
+    special instructions for the seller are entered on the /cart page. Finally, the universal tracking code 
+    of Google Analytics may not work if linking directly to the /checkout page.
+  {% endcomment %}          
+  {% comment %}
+    It would be nice if the logo was a shop setting, rather than a theme setting.
+    But for now, it is a theme setting. The shop logo is uploaded on the theme settings page.
+    Link to the theme settings page of currently published theme will always be:
+    http://www.shopify.com/admin/themes/current/settings.
+    To add theme settings to a theme, see this: http://docs.shopify.com/themes/theme-templates/settings
+    Theme settings are added to http://www.shopify.com/admin/themes/current#config/settings.html
+  {% endcomment %}
+
+
+    {% if template != 'index' %}
+    <div class="container">
+      {{ content_for_layout }}
+    </div> <!-- .container -->
+    {% else %}
+      {{ content_for_layout }}
+    {% endif %}
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          {% comment %}
+          <div class="col-md-3">
+            <ul role="navigation">
+              <li class="subtitle">Account</li>
+              <li>{{ 'Log in' | customer_login_link }}</li>
+              <li>{{ 'Create an account' | customer_register_link }}</li>
+          </div>
+          {% endcomment %}
+          {% include 'footer-nav' with 'services' %}
+          {% include 'footer-nav' with 'about' %}
+          {% include 'footer-nav' with 'discover' %}
+          {% include 'footer-nav' with 'connect' %}
+        </div>
+        <div class="row copyright">
+          <div class="col-md-12">
+            <p role="contentinfo">&copy; {{ "now" | date: "%Y" }}, CHROMA&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="{{ pages.credits.url }}">Credits</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;{{ powered_by_link }}</p>
+          </div>
+        </div>
+      </div> <!-- .container -->
+    </footer>
+
+    {% comment %}Shopify does not support Internet Explorer 6 nor 7. It does encourage themes to support IE8 until the end of 2014.{% endcomment %}
+    <!--[if lt IE 8]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    
+  {{ 'shop.js'  | asset_url | script_tag }}
+  {{ 'tether.min.js' | asset_url | script_tag }}
+  {{ 'bootstrap.min.js' | asset_url | script_tag }}
+  {{ 'scripts.js' | asset_url | script_tag }}
+
+<script src="//www.codeblackbelt.com/js/modules/also-bought/main.min.js?shop=chrrroma.myshopify.com"></script>
+</body>
+</html>
