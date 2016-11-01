@@ -313,6 +313,15 @@ table.table,
 .cart-link a:hover {
   color: $darkgray-hover;
 }
+@media (max-width: 767px) { 
+  .cart-link {
+    position: absolute;
+    top:0;
+    right: 0;
+    // text-align: center;
+    // margin-top: 1rem;
+  }
+}
 .table th {
   font-size: $h6-font-size;
   font-family: "MarkWebBold";
@@ -483,15 +492,17 @@ img,
 
 // THE FELT // ----------------------------
 #the-felt {
-  margin: 6em auto;
+  margin: $page-spacing*1.5 auto;
 }
 @media (max-width: 767px) {
   #the-felt {
-    margin: 3em auto;
+    margin: $page-spacing/2 auto;
+  }
+  #the-felt .col-md-4 {
+    margin: $page-spacing/2 auto;
   }
 }
 .more p {
-  //font-size: $base-font-size*0.8 !important;
   font-size: $base-font-size * 0.8;
 }
 
@@ -529,6 +540,11 @@ h3,
 }
 #shop img:hover {
   opacity: 0.8;
+}
+@media (max-width: 767px) {
+  #shop img {
+    max-width: 75%;
+  }
 }
 // PRODUCT PAGE // ---------------------------
 .product-buy {

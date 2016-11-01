@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="cart-link col-md-3">
-          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }} ({{ cart.total_price | money }})</a>
+          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</a>
           {% if shop.customer_accounts_enabled %}
             <div class="customer-links">
               {% if customer %}
@@ -107,14 +107,6 @@
     <footer>
       <div class="container">
         <div class="row">
-          {% comment %}
-          <div class="col-md-3">
-            <ul role="navigation">
-              <li class="subtitle">Account</li>
-              <li>{{ 'Log in' | customer_login_link }}</li>
-              <li>{{ 'Create an account' | customer_register_link }}</li>
-          </div>
-          {% endcomment %}
           {% include 'footer-nav' with 'services' %}
           {% include 'footer-nav' with 'about' %}
           {% include 'footer-nav' with 'discover' %}

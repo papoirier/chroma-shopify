@@ -21,45 +21,23 @@ Here, for the sake of teaching, we will use 2 presentation options:
 {% endif %}
 
 
-
-<div class="col-md-4">
-  <div>
-    <a href="{{ product.url | within: collection }}">
-      <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" class="img-fluid rounded-circle" />
-    </a>
+  <div class="col-md-4">
+    <div>
+      <a href="{{ product.url | within: collection }}">
+        <img src="{{ product | img_url: 'grande' }}" alt="{{ product.featured_image.alt | escape }}" class="img-fluid rounded-circle mx-auto d-block" />
+      </a>
+    </div>
+    <div class="prod-caption text-xs-center">
+      <h4><a href="{{ product.url | within: collection }}">
+        {{ product.title }}
+      </a></h4>
+      <p class="small">
+      {% for c in product.collections %}
+        {% if c.handle == "felt" %}
+          From
+        {% endif %}
+      {% endfor %}
+      {{ product.price_min | money_without_trailing_zeros }}</p>
+    </div><!-- .prod-caption -->
+    
   </div>
-  <div class="prod-caption text-xs-center">
-    <h4><a href="{{ product.url | within: collection }}">
-      {{ product.title }}
-    </a></h4>
-    <p class="small">
-    {% for c in product.collections %}
-      {% if c.handle == "felt" %}
-        From
-      {% endif %}
-    {% endfor %}
-    {{ product.price_min | money_without_trailing_zeros }}</p>
-  </div><!-- .prod-caption -->
-  
-</div>
-
-{% comment %}
-You don't need to use a clearing div. Use whatever it is you use to clear
-floated elements. The code that follows just just shows you how to use a cycle element.
-Notice that we named it ( 'clear' ). We need to name it because there's another cycle
-element in this file ( we called that other one 'last' ). If you have more than one
-cycle element in a rendered view, you'll need to name all of them.
-The cycle element is documented here: http://docs.shopify.com/themes/liquid-basics/logic#cycle
-{% endcomment %}
-
-{% if product-grid-item == 'six-per-row' %}
-{% cycle 'clear': '', '', '', '', '', '<div style="clear:both"></div>' %}
-{% elsif product-grid-item == 'five-per-row' %}
-{% cycle 'clear': '', '', '', '', '<div style="clear:both"></div>' %}
-{% elsif product-grid-item == 'col-md-3' %}
-{% cycle 'clear': '', '', '', '<div style="clear:both"></div>' %}
-{% elsif product-grid-item == 'col-md-4' %}
-{% cycle 'clear': '', '', '<div style="clear:both"></div>' %}
-{% elsif product-grid-item == 'two-per-row' %}
-{% cycle 'clear': '', '<div style="clear:both"></div>' %}
-{% endif %}
