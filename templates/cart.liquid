@@ -14,18 +14,9 @@
 
   <div class="row">
     <div class="col-md-8 offset-md-2">
-  
       <table class="table">
-        
-
-        
         <tbody>
-
         {% for item in cart.items %}    
-        
-          {% comment %}
-          Determining the handle of the collection that was last seen for the 'continue shopping' link.
-          {% endcomment %}
           
           {% assign collection_url = item.product.collections.last.url %}
           {% if collection_url == '/collections/frontpage' or collection_url == blank %}
@@ -42,7 +33,7 @@
                 <img src="{{ item | img_url: 'compact' }}"  alt="{{ item.title | escape }}" class="img-fluid rounded-circle">
               </a>
             </td>
-            <td>
+            <td class="item-title">
               <a href="{{ collection_url }}{{ item.url }}">{{ item.title }}</a>
               {% comment %}
               Line Item Properties
@@ -65,25 +56,19 @@
               {% endif %}
             </td>
             <!-- td class="hide-on-small">{{ item.price | money }}</td -->
-            <td>
+            <td class="item-quantity">
               <input type="number" name="updates[]" id="updates_{{ item.id }}" class="quantity" value="{{ item.quantity }}" />
             </td>
-            <td>{{ item.line_price | money }}</td>
+            <td class="item-price">{{ item.line_price | money }}</td>
             <td class="hide-on-small remove">
               <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove" alt="remove">&#10005;</a>
             </td>
           </tr>
         {% endfor %}
-        
         </tbody>
       </table>
-    </div>
-  </div>
-  
-  {% comment %}
-  For the checkout and update buttons to work, they need to use
-  a name attribute set to 'checkout' and 'update', respectively. That's case-sensitive.
-  {% endcomment %}
+    </div> <!-- /.col-md-8.offset-md-2 -->
+  </div> <!-- /.row -->
   
   <div class="row cart-total">
     <div class="col-md-8 offset-md-2">
@@ -95,28 +80,8 @@
     <div class="col-md-8 offset-md-2 text-xs-center">
         <input type="submit" name="update" value="Update cart" class="btn btn-secondary btn-lg">
         <input type="submit" name="checkout" value="Check out" class="btn btn-secondary btn-lg btn-checkout">  
-        {% comment %}Paypal and Google checkout buttons{% endcomment %}
-        {% if additional_checkout_buttons %}
-        <p class="additional-checkout-buttons">
-          {{ content_for_additional_checkout_buttons }}
-        </p>
-        {% endif %}
-
     </div>
   </div>
-  
-  {% comment %}
-  For the special instructions to be submitted with order,
-  we need to use a name attribute set to 'note'.
-  
-  <div class="row cart-actions">
-    <div class="col-md-8 offset-md-3 text-xs-center">
-      <p>Special instructions</p>
-      <textarea name="note">{{ cart.note }}</textarea>
-    </div>
-  </div>
-  {% endcomment %}
-
 </form>
 
 </div>
