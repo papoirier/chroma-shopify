@@ -1,7 +1,7 @@
-<div class="row">
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div class="row">
   <div class="col-md-6 offset-md-3">
     <div class="title page-title">
-      <h4>Shopping Cart</h4>
+      <h4><ly-as-2866931>Shopping Cart</ly-as-2866931></h4>
     </div>
   </div>
 </div>
@@ -10,7 +10,7 @@
 
   
 
-<form action="/cart" method="post">
+<form action="/cart{% comment %}ly_checkout_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% assign checkout_code = shop.metafields.language_codes[language] %}{% if checkout_code %}{% assign checkout_code = '?locale=' | append: checkout_code %}{{ checkout_code }}{% endif %}{% comment %}ly_checkout_end{% endcomment %}" method="post">
 
   <div class="row">
     <div class="col-md-8 offset-md-2">
@@ -30,11 +30,11 @@
           <tr>
             <td class="hide-on-small">
               <a href="{{ collection_url }}{{ item.url }}">
-                <img src="{{ item | img_url: 'compact' }}"  alt="{{ item.title | escape }}" class="img-fluid rounded-circle">
+                <img src="{{ item | img_url: 'compact' }}"  alt="{% comment %}ly_code_replace_for_[ item.title | escape ]_begin{% endcomment %}{% include 'ly-title' with item %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}" class="img-fluid rounded-circle">
               </a>
             </td>
             <td class="item-title">
-              <a href="{{ collection_url }}{{ item.url }}">{{ item.title }}</a>
+              <a href="{{ collection_url }}{{ item.url }}">{% comment %}ly_code_replace_for_[ item.title ]_begin{% endcomment %}{% include 'ly-title' with item %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a>
               {% comment %}
               Line Item Properties
               {% endcomment %}
@@ -61,7 +61,7 @@
             </td>
             <td class="item-price">{{ item.line_price | money }}</td>
             <td class="hide-on-small remove">
-              <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="remove" alt="remove">&#10005;</a>
+              <a href="/cart/change?line={{ forloop.index }}&quantity=0" title="<ly-as-2866938>remove</ly-as-2866938>" alt="remove">&#10005;</a>
             </td>
           </tr>
         {% endfor %}
@@ -72,16 +72,31 @@
   
   <div class="row cart-total">
     <div class="col-md-8 offset-md-2">
-      <h6>Subtotal</h6>
-      <h3>{{ cart.total_price | money_with_currency }}</h3>
+      <h5><ly-as-2866932>Subtotal</ly-as-2866932></h5>
+      {% comment %}{ cart.total_price | money_with_currency }} {% endcomment %}
+      <h3>{{ cart.total_price | money }}</h3>
     </div>
   </div>
+
+  {% comment %}
+  For the special instructions to be submitted with order,
+  we need to use a name attribute set to 'note'.
+  {% endcomment %}
+  <div class="row cart-note">
+    <div class="col-md-8 offset-md-2">
+      <h6>Special instructions for seller</h6>
+      <textarea name="note">{{ cart.note }}</textarea>
+    </div>
+  </div>
+
   <div class="row cart-actions">
     <div class="col-md-8 offset-md-2 text-xs-center">
-        <input type="submit" name="update" value="Update cart" class="btn btn-secondary btn-lg">
-        <input type="submit" name="checkout" value="Check out" class="btn btn-secondary btn-lg btn-checkout">  
+        <input type="submit" name="update" value="<ly-as-2866936>Update cart</ly-as-2866936>" class="btn btn-secondary btn-lg">
+        <input type="submit" name="checkout" value="<ly-as-2866937>Check out</ly-as-2866937>" class="btn btn-secondary btn-lg btn-checkout">  
     </div>
   </div>
+
+
 </form>
 
 </div>
@@ -91,8 +106,8 @@
  
 <div class="row page-content">
   <div class="col-md-6 offset-md-3">
-    <h6>It appears that your cart is currently empty!</h6>
-    <p>You can continue browsing <a href="{{ shop.url }}" title="shop home">here</a>.</p>
+    <h6><ly-as-2866933>It appears that your cart is currently empty!</ly-as-2866933></h6>
+    <p><ly-as-2866934>You can continue browsing</ly-as-2866934> <a href="{{ shop.url }}" title="<ly-as-2866939>shop home</ly-as-2866939>"><ly-as-2866935>here</ly-as-2866935></a>.</p>
   </div>
 </div>
 

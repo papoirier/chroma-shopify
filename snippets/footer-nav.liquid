@@ -1,8 +1,8 @@
-<div class="col-md-3">
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div class="col-md-3">
     <ul role="navigation">
-    	<li class="subtitle">{{ linklists.[footer-nav].title }}</li>
+    	<li class="subtitle">{% comment %}ly_code_replace_for_[ linklists.[footer-nav].title ]_begin{% endcomment %}{% include 'ly-title' with linklists.[footer-nav] %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</li>
     	{% for link in linklists.[footer-nav].links %}
-    	<li><a href="{{ link.url }}" title="{{ link.title }}"{% if link.active %} class="active"{% endif %}>{{ link.title }}</a></li>
+    	<li><a href="{{ link.url }}" title="{% comment %}ly_code_replace_for_[ link.title ]_begin{% endcomment %}{% include 'ly-title' with link %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}"{% if link.active %} class="active"{% endif %}>{% comment %}ly_code_replace_for_[ link.title ]_begin{% endcomment %}{% include 'ly-title' with link %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a></li>
     	{% endfor %}
     </ul>
 </div>

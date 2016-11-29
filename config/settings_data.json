@@ -5,7 +5,7 @@
     "link_color": "#b5792b",
     "base_font_family": "'Source Sans Pro', sans-serif",
     "base_font_size": "16px",
-    "use_logo": false,
+    "use_logo": true,
     "facebook_url": "https:\/\/www.facebook.com\/shopify",
     "twitter_url": "https:\/\/twitter.com\/shopify",
     "pinterest_url": "http:\/\/pinterest.com\/shopify\/",
@@ -44,7 +44,10 @@
     "checkout_button_color": "#2f8a59",
     "checkout_error_color": "#ff6d6d",
     "customer_layout": "theme",
-    "heading_font_family": "MarkWebBold"
+    "heading_font_family": "MarkWebBold",
+    "content_for_index": [
+
+    ]
   },
   "presets": {
     "Slate": {

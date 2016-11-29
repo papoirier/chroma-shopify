@@ -1,9 +1,9 @@
-{% paginate blog.articles by 5 %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% paginate blog.articles by 5 %}
 
 {% if current_tags %}
-<h1 class="delta">{{ blog.title | link_to: blog.url }} <span class="quiet">&raquo;</span> {{ current_tags.first }}</h1>
+<h1 class="delta">{% comment %}ly_code_replace_for_[ blog.title | link_to: blog.url ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation | link_to: blog.url }}{% comment %}ly_code_replace_end{% endcomment %} <span class="quiet">&raquo;</span> {{ current_tags.first }}</h1>
 {% else %}
-<h1 class="delta">{{ blog.title }}</h1>
+<h1 class="delta">{% comment %}ly_code_replace_for_[ blog.title ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
 {% endif %}
 
 <div class="articles">
@@ -29,7 +29,7 @@
   
   <div class="article{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %} clear">
     <h2 class="title">
-      <a href="{{ article.url }}">{{ article.title }}</a>
+      <a href="{{ article.url }}">{% comment %}ly_code_replace_for_[ article.title ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a>
     </h2>
     <h3 class="date">
       <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
@@ -49,20 +49,20 @@
         <div class="rte">
       {% endif %}        
           {% if article.excerpt.size > 0 %}
-          <div class="no-images">{{ article.excerpt }}</div>
+          <div class="no-images">{% comment %}ly_code_replace_for_[ article.excerpt ]_begin{% endcomment %}{% include 'ly-excerpt' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</div>
           {% else %}
-          <p>{{ article.content | strip_html | truncatewords: 120 }}</p>
+          <p>{% comment %}ly_code_replace_for_[ article.content | strip_html | truncatewords: 120 ]_begin{% endcomment %}{% include 'ly-content' with article %}{{ ly_translation | strip_html | truncatewords: 120 }}{% comment %}ly_code_replace_end{% endcomment %}</p>
           {% endif %}
         </div>
         <p>
-          <a class="blog-read-more" href="{{ article.url }}">Read more →</a>
+          <a class="blog-read-more" href="{{ article.url }}"><ly-as-2866925>Read more →</ly-as-2866925></a>
         </p>
       </div>
     </div>
     <div class="meta">
       {% if blog.comments_enabled? and article.comments_count > 0 %}
       <span class="meta-comments">
-        <a href="{{ article.url }}#comments"><i class="fa fa-comment"></i> {{ article.comments_count }} {{ article.comments_count | pluralize: 'comment','comments' }}</a>
+        <a href="{{ article.url }}#comments"><i class="fa fa-comment"></i> {{ article.comments_count }} {{ article.comments_count | pluralize: '<ly-as-2866926>comment</ly-as-2866926>','<ly-as-2866926>comment</ly-as-2866926>s' }}</a>
       </span>
       {% endif %}
       {% if article.tags.size > 0 %}
@@ -86,7 +86,7 @@
   because blog articles are shown and paginated in a reversed chronological order.
   The word 'previous' can be confusing, hence we'll change it.
 {% endcomment %}
-{{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+{{ paginate | default_pagination | replace: '<ly-as-2866927>Previous</ly-as-2866927>', '<ly-as-2866928>Newer articles</ly-as-2866928>' | replace: '<ly-as-2866929>Next</ly-as-2866929>', '<ly-as-2866930>Older articles</ly-as-2866930>' }}
 {% endif %}
 
 {% endpaginate %}

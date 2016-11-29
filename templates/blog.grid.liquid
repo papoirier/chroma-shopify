@@ -1,4 +1,4 @@
-{% assign products_per_page = settings.products_per_row | times: settings.number_of_rows %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% assign products_per_page = settings.products_per_row | times: settings.number_of_rows %}
 {% assign numbers = 'one, two, three, four, five, six' | split: ',' %}
 {% assign products_per_row = settings.products_per_row | minus: 1 %}
 {% assign products_per_row = numbers[products_per_row] | strip | append: '-per-row' %}
@@ -6,9 +6,9 @@
 {% paginate blog.articles by products_per_page %}
 
 {% if current_tags %}
-<h1 class="delta">{{ blog.title | link_to: blog.url }} <span class="quiet">&raquo;</span> {{ current_tags.first }}</h1>
+<h1 class="delta">{% comment %}ly_code_replace_for_[ blog.title | link_to: blog.url ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation | link_to: blog.url }}{% comment %}ly_code_replace_end{% endcomment %} <span class="quiet">&raquo;</span> {{ current_tags.first }}</h1>
 {% else %}
-<h1 class="delta">{{ blog.title }}</h1>
+<h1 class="delta">{% comment %}ly_code_replace_for_[ blog.title ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
 {% endif %}
 
 <ul class="grid clearfix">
@@ -24,7 +24,7 @@
   because blog articles are shown and paginated in a reversed chronological order.
   The word 'previous' can be confusing, hence we'll change it.
 {% endcomment %}
-{{ paginate | default_pagination | replace: 'Previous', 'Newer articles' | replace: 'Next', 'Older articles' }}
+{{ paginate | default_pagination | replace: '<ly-as-2866921>Previous</ly-as-2866921>', '<ly-as-2866922>Newer articles</ly-as-2866922>' | replace: '<ly-as-2866923>Next</ly-as-2866923>', '<ly-as-2866924>Older articles</ly-as-2866924>' }}
 {% endif %}
 
 {% endpaginate %}

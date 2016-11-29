@@ -1,4 +1,4 @@
-{% comment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}
   Be prepared to use this snippet to showcase collections specified in a link list as per this solution here: 
   "Featuring collections using a Link List" http://docs.shopify.com/support/your-store/collections/featuring-collections-using-link-lists
   If this snippet is called with an argument, we'll assume it is the handle of a link list, and we will use that list.
@@ -19,7 +19,7 @@
   {% assign using_link_list = true %}
 {% endif %}
 
-<h1>{% if using_link_list %}{{ linklists[collection-listing].title }}{% else %}Collections{% endif %}</h1>
+<h1>{% if using_link_list %}{% comment %}ly_code_replace_for_[ linklists[collection-listing].title ]_begin{% endcomment %}{% include 'ly-title' with linklists[collection-listing] %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}{% else %}<ly-as-2866883>Collections</ly-as-2866883>{% endif %}</h1>
 
 {% if using_link_list %}
 <ul class="grid clearfix">

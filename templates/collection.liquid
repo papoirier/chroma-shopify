@@ -1,4 +1,4 @@
-{% comment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}
   Important notes about pagination:
   - Never access collection.products before the opening paginate tag.
   - Never paginate by more than 50.
@@ -23,21 +23,21 @@
   - blog post
 {% endcomment %}
 
-<h1 class="left">{{ collection.title }}</h1>
+<h1 class="left">{% comment %}ly_code_replace_for_[ collection.title ]_begin{% endcomment %}{% include 'ly-title' with collection %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h1>
 
 {% comment %}
   Collection sorting. Needs the JavaScript that is at the bottom of this file.
 {% endcomment %}
 {% if collection.products_count > 1 %}
 <select class="sort-by right">
-  <option value="manual">Featured</option>
-  <option value="price-ascending">Price: Low to High</option>
-  <option value="price-descending">Price: Hight to Low</option>
-  <option value="title-ascending">A-Z</option>
-  <option value="title-descending">Z-A</option>
-  <option value="created-ascending">Oldest to Newest</option>
-  <option value="created-descending">Newest to Oldest</option>
-  <option value="best-selling">Best Selling</option>
+  <option value="manual"><ly-as-2866940>Featured</ly-as-2866940></option>
+  <option value="price-ascending"><ly-as-2866941>Price: Low to High</ly-as-2866941></option>
+  <option value="price-descending"><ly-as-2866942>Price: Hight to Low</ly-as-2866942></option>
+  <option value="title-ascending"><ly-as-2866943>A-Z</ly-as-2866943></option>
+  <option value="title-descending"><ly-as-2866944>Z-A</ly-as-2866944></option>
+  <option value="created-ascending"><ly-as-2866945>Oldest to Newest</ly-as-2866945></option>
+  <option value="created-descending"><ly-as-2866946>Newest to Oldest</ly-as-2866946></option>
+  <option value="best-selling"><ly-as-2866947>Best Selling</ly-as-2866947></option>
  </select>
 {% endif %}
 
@@ -51,7 +51,7 @@
 {% if collection.all_tags.size > 0 %}
 <ul class="subcategories clearfix clear">
   <li class="{% unless current_tags %} active{% endunless %}">
-    {{ 'All' | link_to_remove_tag: current_tags.first }}
+    {{ '<ly-as-2866948>All</ly-as-2866948>' | link_to_remove_tag: current_tags.first }}
   </li>
   {% for tag in collection.all_tags %}
   {% if current_tags contains tag %}
@@ -69,7 +69,7 @@
 
 {% if collection.description.size > 0 %}
 <div class="rte clearfix">
-  {{ collection.description }}
+  {% comment %}ly_code_replace_for_[ collection.description ]_begin{% endcomment %}{% include 'ly-description' with collection %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
 </div>
 {% endif %}
 
@@ -77,7 +77,7 @@
 {% for product in collection.products %}
   {% include 'product-grid-item' with products_per_row %}
 {% else %}
-  <p>There are no products in this view.</p>
+  <p><ly-as-2866949>There are no products in this view.</ly-as-2866949></p>
 {% endfor %}
 </ul>
 

@@ -1,4 +1,4 @@
-{% assign add_to_cart = 'Add to cart' %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% assign add_to_cart = 'Add to cart' %}
 {% assign sold_out = 'Sold Out' %}
 {% assign unavailable = 'Unavailable' %}
 
@@ -15,10 +15,10 @@
         <div class="product-photos">
 
           {% if product.images.size > 1 %}
-          <img src="{{ product.images[1] | product_img_url: 'grande' }}" alt="{{ product.title | escape  }}" class="img-fluid mx-auto d-block">
+          <img src="{{ product.images[1] | product_img_url: 'grande' }}" alt="{% comment %}ly_code_replace_for_[ product.title | escape  ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation | escape  }}{% comment %}ly_code_replace_end{% endcomment %}" class="img-fluid mx-auto d-block">
           ​{% else %}
           <!-- just show the first one instead -->
-          <img src="{{ product.images[0] | product_img_url: 'grande' }}" alt="{{ product.title | escape }}" class="img-fluid mx-auto d-block">
+          <img src="{{ product.images[0] | product_img_url: 'grande' }}" alt="{% comment %}ly_code_replace_for_[ product.title | escape ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}" class="img-fluid mx-auto d-block">
           {% endif %}
     
         </div><!-- .product-photos -->
@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="title">
-          <h4 itemprop="name">{{ product.title }}</h4>
+          <h4 itemprop="name">{% comment %}ly_code_replace_for_[ product.title ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h4>
         </div>
       </div> <!-- /.col-md-6.offset-md-3 -->
     </div> <!-- /.row -->
@@ -37,12 +37,12 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div id="product-description" class="rte" itemprop="description">
-          {{ product.description }}
+          {% comment %}ly_code_replace_for_[ product.description ]_begin{% endcomment %}{% include 'ly-description' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
         </div>
         {% comment %}
           All themes by Shopify should support the Product Reviews app out of the box.
           https://apps.shopify.com/product-reviews
-        <div id="shopify-product-reviews" data-id="{{ product.id }}">{{ product.metafields.spr.reviews }}</div>
+        <div id="shopify-product-reviews" data-id="{{ product.id }}">{% comment %}ly_code_replace_for_[ product.metafields.spr.reviews ]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% assign ns = language | append: 'spr' %}{% assign key = 'reviews' %}{% if product.metafields[ns][key] %}{% assign ly_translation = product.metafields[ns][key] %}{% else %}{% assign ly_translation =  product.metafields.spr.reviews  %}{% endif %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</div>
         {% endcomment %}
         <hr>
       </div> <!-- /.col-md-6.offset-md-3 -->
@@ -60,7 +60,7 @@
           <select id="product-select" name="id">
           {% for variant in product.variants %}
             <option {% if variant == product.selected_or_first_available_variant %} selected{% endif %} value="{{ variant.id }}">
-            {{ variant.title }} - {{ variant.price | money }}
+            {% comment %}ly_code_replace_for_[ variant.title ]_begin{% endcomment %}{% include 'ly-title' with variant %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %} - {{ variant.price | money }}
             </option>
           {% endfor %}
           </select>
@@ -123,7 +123,7 @@ var selectCallback = function(variant, selector) {
     
       // If item is backordered yet can still be ordered, we'll show special message.
       if (variant.inventory_management && variant.inventory_quantity <= 0) {
-        jQuery('#selected-variant').html({{ product.title | json }}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
+        jQuery('#selected-variant').html({% comment %}ly_code_replace_for_[ product.title | json ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation | json }}{% comment %}ly_code_replace_end{% endcomment %}{% unless hide_default_title %} + ' - ' + variant.title{% endunless %});
         jQuery('#backorder').removeClass("hidden");
       } else {
         jQuery('#backorder').addClass("hidden");

@@ -1,4 +1,4 @@
-{% paginate article.comments by 50 %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% paginate article.comments by 50 %}
 
 {% comment %}
 When a comment has just been submitted, it's not shown right away.
@@ -23,22 +23,22 @@ Note that comment.created_at will only be defined if the comment did not have an
   {% assign number_of_comments = article.comments_count | plus: 1 %}
 {% endif %}
 
-<h2 class="delta"><a href="{{ blog.url }}">{{ blog.title }}</a></h2>
+<h2 class="delta"><a href="{{ blog.url }}">{% comment %}ly_code_replace_for_[ blog.title ]_begin{% endcomment %}{% include 'ly-title' with blog %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</a></h2>
 
 <div class="article">
   <h1 class="title">
-    {{ article.title }}
+    {% comment %}ly_code_replace_for_[ article.title ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
   </h1>
   <h3 class="date">
     <time pubdate datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%b %d, %Y' }}</time>
   </h3>
   <div class="rte">
-    {{ article.content }}
+    {% comment %}ly_code_replace_for_[ article.content ]_begin{% endcomment %}{% include 'ly-content' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
   </div>
   <div class="meta">
     {% if blog.comments_enabled? and article.comments_count > 0 %}
     <span class="meta-comments">
-      <a href="#comments"><i class="fa fa-comment"></i> {{ article.comments_count }} {{ article.comments_count | pluralize: 'comment','comments' }}</a>
+      <a href="#comments"><i class="fa fa-comment"></i> {{ article.comments_count }} {{ article.comments_count | pluralize: '<ly-as-2866907>comment</ly-as-2866907>','<ly-as-2866907>comment</ly-as-2866907>s' }}</a>
     </span>
     {% endif %}
     {% if article.tags.size > 0 %}
@@ -58,9 +58,9 @@ Note that comment.created_at will only be defined if the comment did not have an
   {% if comment and comment.created_at %}
   <p class="success feedback">
     {% if blog.moderated? %}
-    Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.
+    <ly-as-2866908>Your comment was posted successfully. We will publish it in a little while, as our blog is moderated.</ly-as-2866908>
     {% else %}
-    Your comment was posted successfully! Thank you!
+    <ly-as-2866909>Your comment was posted successfully! Thank you!</ly-as-2866909>
     {% endif %}
   </p>
   {% endif %}
@@ -70,24 +70,24 @@ Note that comment.created_at will only be defined if the comment did not have an
     {% comment %}If a comment was just submitted with no blank field, let's show it.{% endcomment %}
     {% if comment and comment.created_at %}
     <li id="{{ comment.id }}" class="comment first{% if article.comments_count == 0 %} last{% endif %}">
-      <h3 class="comment-author">{{ comment.author }} says...</h3>
+      <h3 class="comment-author">{{ comment.author }} <ly-as-2866910>says...</ly-as-2866910></h3>
       <div class="comment-content">
-        {{ comment.content }}
+        {% comment %}ly_code_replace_for_[ comment.content ]_begin{% endcomment %}{% include 'ly-content' with comment %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </div>
       <p class="comment-date">
-        On {{ comment.created_at | date: "%B %d, %Y" }}
+        <ly-as-2866911>On</ly-as-2866911> {{ comment.created_at | date: "%B %d, %Y" }}
       </p>
     </li>
     {% endif %}
     {% comment %}Showing the rest of the comments.{% endcomment %}
     {% for comment in article.comments %}
     <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
-      <h3 class="comment-author">{{ comment.author }} says...</h3>
+      <h3 class="comment-author">{{ comment.author }} <ly-as-2866910>says...</ly-as-2866910></h3>
       <div class="comment-content">
-        {{ comment.content }}
+        {% comment %}ly_code_replace_for_[ comment.content ]_begin{% endcomment %}{% include 'ly-content' with comment %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </div>
       <p class="comment-date">
-        On {{ comment.created_at | date: "%B %d, %Y" }}
+        <ly-as-2866911>On</ly-as-2866911> {{ comment.created_at | date: "%B %d, %Y" }}
       </p>
     </li>
     {% endfor %}
@@ -104,7 +104,7 @@ Note that comment.created_at will only be defined if the comment did not have an
   {% comment %}Comment submission form.{% endcomment %}
   {% form "new_comment", article %}
   
-  <h3 id="add-comment-title">Leave a comment</h3>
+  <h3 id="add-comment-title"><ly-as-2866912>Leave a comment</ly-as-2866912></h3>
   
   {% if form.errors %}
   <div class="feedback error">
@@ -113,21 +113,21 @@ Note that comment.created_at will only be defined if the comment did not have an
   {% endif %}
 
   <p>
-    <label for="comment-author">Name</label>
-    <input required{% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" placeholder="Your name" id="comment-author" value="{{ form.author }}" />
+    <label for="comment-author"><ly-as-2866913>Name</ly-as-2866913></label>
+    <input required{% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" placeholder="<ly-as-2866919>Your name</ly-as-2866919>" id="comment-author" value="{{ form.author }}" />
   </p>
 
   <p>
-    <label for="comment-email">Email</label>
-    <input required{% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" placeholder="your@email.com" id="comment-email" value="{{ form.email }}" />
+    <label for="comment-email"><ly-as-2866914>Email</ly-as-2866914></label>
+    <input required{% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" placeholder="<ly-as-2866920>your@email.com</ly-as-2866920>" id="comment-email" value="{{ form.email }}" />
   </p>
 
   <p>
-    <label for="comment-body">Message</label>
+    <label for="comment-body"><ly-as-2866915>Message</ly-as-2866915></label>
     <textarea required{% if form.errors contains "body" %} class="error"{% endif %} name="comment[body]" id="comment-body">{{ form.body }}</textarea>
   </p>
 
-  <input type="submit" value="Post Comment" /> 
+  <input type="submit" value="<ly-as-2866918>Post Comment</ly-as-2866918>" /> 
   
   {% if form.errors %}
     <script>
@@ -149,10 +149,10 @@ Note that comment.created_at will only be defined if the comment did not have an
 {% if blog.next_article or blog.previous_article %}
 <p class="clearfix"> 
   {% if blog.next_article %}
-  <span class="left">{{ '&larr; Next Post' | link_to: blog.next_article }}</span>
+  <span class="left">{{ '&larr; <ly-as-2866916>Next Post</ly-as-2866916>' | link_to: blog.next_article }}</span>
   {% endif %}    
   {% if blog.previous_article %}
-  <span class="right">{{ 'Previous Post &rarr;' | link_to: blog.previous_article }}</span>
+  <span class="right">{{ '<ly-as-2866917>Previous Post</ly-as-2866917> &rarr;' | link_to: blog.previous_article }}</span>
   {% endif %}
 </p>
 {% endif %}

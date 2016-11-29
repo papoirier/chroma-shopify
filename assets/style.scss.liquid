@@ -23,7 +23,6 @@ $page-spacing: 4rem;
 
 // TYPOGRAPHY // -----------------------------
 
-
 // eot
 @font-face {
     font-family: MarkWeb;
@@ -606,6 +605,7 @@ td.item-quantity {
   margin-top: $page-spacing/2;
 }
 .cart-total h6,
+.cart-total h5,
 .cart-total h3 {
   text-align: center;
 }
@@ -615,6 +615,15 @@ td.item-quantity {
 .cart-actions a.btn,
 .cart-actions input.btn {
   margin: 0rem 0.4rem;
+}
+.cart-note {
+  text-align: center;
+  margin-top: $page-spacing/2;
+}
+.cart-note textarea {
+  width: 100%;
+  padding: 0.8rem 1em;
+  border: 1px solid $midgray;
 }
 @media (max-width: 767px) {
   .cart-total,
@@ -663,7 +672,7 @@ footer ul {
   font-size: $font-size-footer;
   // list-style-type: none;
   // text-decoration: none;
-  // padding-left: 0;
+  padding-left: 0;
 }
 footer li {
   margin-bottom: $font-size-footer/4;
@@ -699,6 +708,15 @@ footer li.subtitle {
   footer .col-md-3:first-child li.subtitle   {
     margin-top: 0;
   }
+}
+// LANGUAGE SWITCHER // 
+.ly-languages-switcher-link.current_lang {
+  visibility: hidden;
+  display: none;
+}
+ul#ly-languages-switcher li a {
+  margin-left: -3px;
+
 }
 .copyright {
   margin-top: $page-spacing/2;

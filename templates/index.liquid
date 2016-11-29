@@ -1,4 +1,4 @@
-{% comment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}
   Re-use the 'rte' class wherever you output content that was added by a merchant using the Rich Text Editor ( 'rte' stands for rich text editor ).
   Style all HTML elements in that content the same way across the board.
   Use the 'rte' class in your CSS to help maintain that consistency.
@@ -25,13 +25,13 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 intro-brand" role="banner">
         <div class="intro-logo">
-          {{ 'logo.png' | asset_url | img_tag: shop.name, 'img-fluid'}}
+          {% comment %}ly_asset_replace_for_[ 'logo.png' | asset_url | img_tag: langify_shop_name, 'img-fluid']_begin{% endcomment %}{% assign ly_asset = 'logo.png' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | img_tag: langify_shop_name, 'img-fluid' }}{% comment %}ly_asset_replace_end{% endcomment %}
         </div>
         <div class="intro-mobile-img">
-          {{ 'mobile-felt.png' | asset_url | img_tag: shop.name, 'img-fluid'}}
+          {% comment %}ly_asset_replace_for_[ 'mobile-felt.png' | asset_url | img_tag: langify_shop_name, 'img-fluid']_begin{% endcomment %}{% assign ly_asset = 'mobile-felt.png' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | img_tag: langify_shop_name, 'img-fluid' }}{% comment %}ly_asset_replace_end{% endcomment %}
         </div>
         <div class="intro-text">
-          <h4>{{ page.content }}</h4>
+          <h4>{% comment %}ly_code_replace_for_[ page.content ]_begin{% endcomment %}{% include 'ly-content' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h4>
         </div>
         
         {% comment %}
@@ -39,7 +39,7 @@
           Other pages should use the resource name as h1 tag. For example, on the product
           page, the product title will use a h1 tag.
         {% endcomment %}
-        <h1 class="hidden-xs-up">CHROMA</h1>
+        <h1 class="hidden-xs-up"><ly-as-2866962>CHROMA</ly-as-2866962></h1>
         
       </div>
     </div>
@@ -60,16 +60,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h5>{{ pages.100-mixed-recycled-fibers.title }}</h5>
-        {{ pages.100-mixed-recycled-fibers.content }}
+        <h5>{% comment %}ly_code_replace_for_[ pages.100-mixed-recycled-fibers.title ]_begin{% endcomment %}{% include 'ly-title' with pages.100-mixed-recycled-fibers %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h5>
+        {% comment %}ly_code_replace_for_[ pages.100-mixed-recycled-fibers.content ]_begin{% endcomment %}{% include 'ly-content' with pages.100-mixed-recycled-fibers %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </div>
       <div class="col-md-4">
-        <h5>{{ pages.no-dye-added.title }}</h5>
-        {{ pages.no-dye-added.content }}
+        <h5>{% comment %}ly_code_replace_for_[ pages.no-dye-added.title ]_begin{% endcomment %}{% include 'ly-title' with pages.no-dye-added %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h5>
+        {% comment %}ly_code_replace_for_[ pages.no-dye-added.content ]_begin{% endcomment %}{% include 'ly-content' with pages.no-dye-added %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </div>
       <div class="col-md-4">
-        <h5>{{ pages.less-than-600-km-traveled.title }}</h5>
-        {{ pages.less-than-600-km-traveled.content }}
+        <h5>{% comment %}ly_code_replace_for_[ pages.less-than-600-km-traveled.title ]_begin{% endcomment %}{% include 'ly-title' with pages.less-than-600-km-traveled %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h5>
+        {% comment %}ly_code_replace_for_[ pages.less-than-600-km-traveled.content ]_begin{% endcomment %}{% include 'ly-content' with pages.less-than-600-km-traveled %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@
 <section id="shop">
   <div class="container">
     <div class="row title">
-      <h3 class="skew skew-right">{{ pages.the-felts.title }}</h3>
+      <h3 class="skew skew-right">{% comment %}ly_code_replace_for_[ pages.the-felts.title ]_begin{% endcomment %}{% include 'ly-title' with pages.the-felts %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h3>
     </div>
     <div class="row products"> 
       {% for product in collections.felt.products %}
@@ -88,7 +88,7 @@
     </div> <!-- /.row.felts -->
 
     <div class="row title">
-      <h3 class="skew skew-left">{{ pages.the-baskets.title }}</h3>
+      <h3 class="skew skew-left">{% comment %}ly_code_replace_for_[ pages.the-baskets.title ]_begin{% endcomment %}{% include 'ly-title' with pages.the-baskets %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h3>
     </div>
     <div class="row products">
       {% for product in collections.baskets.products %}
@@ -97,7 +97,7 @@
     </div> <!-- /.row.baskets -->
 
     <div class="row title">
-      <h3 class="skew skew-right">{{ pages.the-sample.title }}</h3>
+      <h3 class="skew skew-right">{% comment %}ly_code_replace_for_[ pages.the-sample.title ]_begin{% endcomment %}{% include 'ly-title' with pages.the-sample %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h3>
     </div>
     <div class="row sample">
       {% for product in collections.sample.products %}

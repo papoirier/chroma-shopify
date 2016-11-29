@@ -1,4 +1,4 @@
-{% comment %}If no value is passed to the snippet, we will set the snippet variable to a sensible default.{% endcomment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}If no value is passed to the snippet, we will set the snippet variable to a sensible default.{% endcomment %}
 {% if article-grid-item == '' %}{% assign article-grid-item = 'col-md-4' %}{% endif %}
 
 {% assign article_has_image = false %}
@@ -21,7 +21,7 @@
   {% if article_has_image %}
   <div class="article-image-wrap">  
     <a href="{{ article.url }}">
-      <img src="{{ image_src }}" alt="{{ article.title | escape }}" />
+      <img src="{{ image_src }}" alt="{% comment %}ly_code_replace_for_[ article.title | escape ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}" />
     </a>
   </div><!-- .prod-image-wrap -->
   {% endif %}
@@ -29,14 +29,14 @@
   <div class="article-caption">
       <h3>
         <a href="{{ article.url }}">
-        {{ article.title }}
+        {% comment %}ly_code_replace_for_[ article.title ]_begin{% endcomment %}{% include 'ly-title' with article %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
         </a>
       </h3>
       <p class="article-summary">
         {% if article.excerpt.size > 0 %}
-        {{ article.excerpt | strip_html }}
+        {% comment %}ly_code_replace_for_[ article.excerpt | strip_html ]_begin{% endcomment %}{% include 'ly-excerpt' with article %}{{ ly_translation | strip_html }}{% comment %}ly_code_replace_end{% endcomment %}
         {% else %}
-        {{ article.content | strip_html | truncatewords: 50 }}
+        {% comment %}ly_code_replace_for_[ article.content | strip_html | truncatewords: 50 ]_begin{% endcomment %}{% include 'ly-content' with article %}{{ ly_translation | strip_html | truncatewords: 50 }}{% comment %}ly_code_replace_end{% endcomment %}
         {% endif %}
       </p>
   </div><!-- .prod-caption -->
@@ -46,7 +46,7 @@
   </p>
    
   <p class="right right-aligned">
-    <a href="{{ article.url }}">Read more &#8594;</a>
+    <a href="{{ article.url }}"><ly-as-2866881>Read more</ly-as-2866881> &#8594;</a>
   </p>
   
 </li>

@@ -1,4 +1,4 @@
-{% comment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}
 It may be a good idea to provide a theme setting that lets a merchant decide how many products to show per row
 on collection pages. Or, it may be a good idea to provide a control on the store front which lets a shopper decide 
 whether items be presented in a grid or in a list.
@@ -29,12 +29,12 @@ Here, for the sake of teaching, we will use 2 presentation options:
     </div>
     <div class="prod-caption text-xs-center">
       <h4><a href="{{ product.url | within: collection }}">
-        {{ product.title }}
+        {% comment %}ly_code_replace_for_[ product.title ]_begin{% endcomment %}{% include 'ly-title' with product %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </a></h4>
       <p class="small">
       {% for c in product.collections %}
         {% if c.handle == "felt" %}
-          From
+          <ly-as-2866889>From</ly-as-2866889>
         {% endif %}
       {% endfor %}
       {{ product.price_min | money_without_trailing_zeros }}</p>

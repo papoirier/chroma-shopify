@@ -1,4 +1,4 @@
-{% comment %}If no value is passed to the snippet, we will set the snippet variable to a sensible default.{% endcomment %}
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}If no value is passed to the snippet, we will set the snippet variable to a sensible default.{% endcomment %}
 {% if collection-grid-item == '' %}{% assign collection-grid-item = 'col-md-4' %}{% endif %}
 
 <li class="{{ collection-grid-item }} centered">
@@ -8,17 +8,17 @@
       {% if collection.image %}
       <img src="{{ collection | img_url: 'grande' }}" alt="{{ collection.image.alt | escape }}" />
       {% else %}
-      <img src="{{ collection.products.first | img_url: 'grande' }}" alt="{{ collection.title | escape }}" />
+      <img src="{{ collection.products.first | img_url: 'grande' }}" alt="{% comment %}ly_code_replace_for_[ collection.title | escape ]_begin{% endcomment %}{% include 'ly-title' with collection %}{{ ly_translation | escape }}{% comment %}ly_code_replace_end{% endcomment %}" />
       {% endif %}
     </a>
   </div><!-- .coll-image-wrap -->
   
   <div class="coll-caption">
       <a class="coll-title" href="{{ collection.url }}">
-        {{ collection.title }}
+        {% comment %}ly_code_replace_for_[ collection.title ]_begin{% endcomment %}{% include 'ly-title' with collection %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       </a>
       <span class="coll-item-count">
-        {{ collection.all_products_count }} {{ collection.all_products_count | pluralize:'item','items' }}
+        {{ collection.all_products_count }} {{ collection.all_products_count | pluralize:'<ly-as-2866882>item</ly-as-2866882>','<ly-as-2866882>item</ly-as-2866882>s' }}
       </span>
   </div><!-- .coll-caption -->
   

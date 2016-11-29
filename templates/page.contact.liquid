@@ -1,14 +1,14 @@
-<div class="row">
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div class="row">
 	<div class="col-md-6 offset-md-3">
 		<div class="title">
-			<h4>{{ page.title }}</h4>
+			<h4>{% comment %}ly_code_replace_for_[ page.title ]_begin{% endcomment %}{% include 'ly-title' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h4>
 		</div>
     </div>
 </div>
 
 <div class="row page-content">
 	<div class="col-md-6 offset-md-3">
-	  {{ page.content }}
+	  {% comment %}ly_code_replace_for_[ page.content ]_begin{% endcomment %}{% include 'ly-content' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
       {% form 'contact' %}
 
   {% if form.posted_successfully? %}
@@ -20,9 +20,9 @@
   {% if form.errors %}
   <div class="errorForm feedback">
     <!-- {{ form.errors.size }} or {{ form.errors | size }} -->
-    <p>Your contact form has {{ form.errors | size | pluralize: "an error", "a few errors" }}. To submit your form, make the following changes and try again:</p>
+    <p><ly-as-2866963>Your contact form has</ly-as-2866963> {{ form.errors | size | pluralize: "<ly-as-2866964>an error</ly-as-2866964>", "<ly-as-2866965>a few errors</ly-as-2866965>" }}<ly-as-2866966>. To submit your form, make the following changes and try again:</ly-as-2866966></p>
     {% for field in form.errors %}
-      <p>The {{ field | capitalize | replace: 'Body', 'Message' }} field {{ form.errors.messages[field] }}.</p>
+      <p><ly-as-2866967>The</ly-as-2866967> {{ field | capitalize | replace: '<ly-as-2866968>Body</ly-as-2866968>', '<ly-as-2866969>Message</ly-as-2866969>' }} <ly-as-2866970>field</ly-as-2866970> {{ form.errors.messages[field] }}.</p>
     {% endfor %}
   </div>
   {% endif %}

@@ -1,13 +1,13 @@
-<div class="row">
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}<div class="row">
 	<div class="col-md-6 offset-md-3">
 		<div class="title page-title">
-			<h4>{{ page.title }}</h4>
+			<h4>{% comment %}ly_code_replace_for_[ page.title ]_begin{% endcomment %}{% include 'ly-title' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}</h4>
 		</div>
     </div>
 </div>
 <div class="row page-content newsletter-content">
 	<div class="col-md-6 offset-md-3">
-		{{ page.content }}
+		{% comment %}ly_code_replace_for_[ page.content ]_begin{% endcomment %}{% include 'ly-content' with page %}{{ ly_translation }}{% comment %}ly_code_replace_end{% endcomment %}
 	</div>
 </div>
 <div class="row newsletter-forms">

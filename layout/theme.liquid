@@ -1,23 +1,23 @@
-<!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9 ]><html class="ie9 no-js"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->  
+{% comment %}ly_global_begin{% endcomment %}{% include 'ly-global' %}{% comment %}ly_global_end{% endcomment %}{% comment %}ly_static_code_begin{% endcomment %}{% capture ly_content %}{% comment %}ly_static_code_end{% endcomment %}<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if IE 9 ]><html class="ie9 no-js"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js"{% comment %}ly_dir_replace_for_[]_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %} dir="rtl" {% endif %}{% comment %}ly_dir_replace_end{% endcomment %}> <!--<![endif]-->  
 <head>
   <meta charset="utf-8" />
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' /><![endif]-->
 
   <title>
-  {{ page_title }}{% if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  {{ langify_title }}{% if current_tags %} &ndash; <ly-as-2866866>tagged "</ly-as-2866866>{{ current_tags | join: ', ' }}"{% endif %}{% if current_page != 1 %} &ndash; <ly-as-2866867>Page</ly-as-2866867> {{ current_page }}{% endif %}{% unless langify_title contains langify_shop_name %} &ndash; {{ langify_shop_name }}{% endunless %}
   </title>
 
-  {% if page_description %}
-  <meta name="description" content="{{ page_description | escape }}" />
+  {% if langify_description %}
+  <meta name="description" content="{{ langify_description | escape }}" />
   {% endif %}
 
   <link rel="canonical" href="{{ canonical_url }}" />
-  <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/png" />
+  <link rel="shortcut icon" href="{% comment %}ly_asset_replace_for_[ 'favicon.png' | asset_url ]_begin{% endcomment %}{% assign ly_asset = 'favicon.png' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  }}{% comment %}ly_asset_replace_end{% endcomment %}" type="image/png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   
   {% include 'open-graph-tags' %}
@@ -25,8 +25,8 @@
 
   {{ content_for_header }}
 
-  {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
-  {{ 'style.scss.css' | asset_url | stylesheet_tag }}
+  {% comment %}ly_asset_replace_for_[ 'bootstrap.min.css' | asset_url | stylesheet_tag ]_begin{% endcomment %}{% assign ly_asset = 'bootstrap.min.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | stylesheet_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% comment %}ly_asset_replace_for_[ 'style.scss.css' | asset_url | stylesheet_tag ]_begin{% endcomment %}{% assign ly_asset = 'style.scss.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | stylesheet_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
 
   <!--[if lt IE 9]>
   {{ '//html5shiv.googlecode.com/svn/trunk/html5.js' | script_tag }}
@@ -38,16 +38,16 @@
   {% endif %}
   
   <!-- Additional Shopify helpers that will likely be added to the global shopify_common.js some day soon. -->
-  {{ 'shopify_common.js'  | asset_url | script_tag }}
+  {% comment %}ly_asset_replace_for_[ 'shopify_common.js'  | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'shopify_common.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
 
   {{ 'option_selection.js' | shopify_asset_url | script_tag }}
 
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   <script>jQuery('html').removeClass('no-js').addClass('js');</script>
 
-</head>
+{% comment %}ly_dir_styles_begin{% endcomment %}{% assign language = cart.attributes["language"] %}{% if language == nil %}{% assign language = shop.metafields["languages"]["default"] %}{% endif %}{% if shop.metafields.languages_dir[language] == 'rtl' %}{% comment %}ly_asset_replace_for_[ 'ly-rtl.css' | asset_url | stylesheet_tag ]_begin{% endcomment %}{% assign ly_asset = 'ly-rtl.css' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | stylesheet_tag }}{% comment %}ly_asset_replace_end{% endcomment %}{% endif %}{% comment %}ly_dir_styles_end{% endcomment %}</head>
 
-<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+<body id="{{ langify_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
 
   <nav class="navbar navbar-default">
@@ -56,16 +56,16 @@
         <div class="col-md-6 offset-md-3">
           <div class="nav-logo mx-auto">
             {% if template != 'index' %}
-            <a href="{{ shop.url }}" class=""><img src="{{ 'logo-inline.svg' | asset_url }}" title="logo" alt="CHROMA"></a>
+            <a href="{{ shop.url }}" class=""><img src="{% comment %}ly_asset_replace_for_[ 'logo-inline.svg' | asset_url ]_begin{% endcomment %}{% assign ly_asset = 'logo-inline.svg' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  }}{% comment %}ly_asset_replace_end{% endcomment %}" title="logo" alt="<ly-as-2866872>CHROMA</ly-as-2866872>"></a>
             {% endif %}
           </div>
         </div>
         <div class="cart-link col-md-3">
-          <a href="/cart"><img src="{{ 'cart.svg' | asset_url }}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}</a>
+          <a href="/cart"><img src="{% comment %}ly_asset_replace_for_[ 'cart.svg' | asset_url ]_begin{% endcomment %}{% assign ly_asset = 'cart.svg' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  }}{% comment %}ly_asset_replace_end{% endcomment %}" /> {{ cart.item_count }} {{ cart.item_count | pluralize: '<ly-as-2866868>item</ly-as-2866868>', '<ly-as-2866869>items</ly-as-2866869>' }}</a>
           {% if shop.customer_accounts_enabled %}
             <div class="customer-links">
               {% if customer %}
-                Logged in as <a href="/account">{{ customer.first_name }}</a> · {{ 'Log out' | customer_logout_link }}
+                <ly-as-2866870>Logged in as</ly-as-2866870> <a href="/account">{{ customer.first_name }}</a> · {{ '<ly-as-2866871>Log out</ly-as-2866871>' | customer_logout_link }}
               {% comment %}
               {% else %}
                 {{ 'Log in' | customer_login_link }}
@@ -107,14 +107,14 @@
     <footer>
       <div class="container">
         <div class="row">
-          {% include 'footer-nav' with 'services' %}
+          {% include 'footer-lang'%}
           {% include 'footer-nav' with 'about' %}
           {% include 'footer-nav' with 'discover' %}
           {% include 'footer-nav' with 'connect' %}
         </div>
         <div class="row copyright">
           <div class="col-md-12">
-            <p role="contentinfo">&copy; {{ "now" | date: "%Y" }}, <span class="sc">CHROMA</span>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="{{ pages.credits.url }}">Credits</a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;{{ powered_by_link }}</p>
+            <p role="contentinfo">&copy; {{ "now" | date: "%Y" }}, <span class="sc"><ly-as-2866872>CHROMA</ly-as-2866872></span>&nbsp;&nbsp;&bull;&nbsp;&nbsp;<a href="{{ pages.credits.url }}"><ly-as-2866873>Credits</ly-as-2866873></a>&nbsp;&nbsp;&bull;&nbsp;&nbsp;{{ powered_by_link }}</p>
           </div>
         </div>
       </div> <!-- .container -->
@@ -122,14 +122,14 @@
 
     {% comment %}Shopify does not support Internet Explorer 6 nor 7. It does encourage themes to support IE8 until the end of 2014.{% endcomment %}
     <!--[if lt IE 8]>
-    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <p class="chromeframe"><ly-as-2866874>You are using an</ly-as-2866874> <strong><ly-as-2866875>outdated</ly-as-2866875></strong> <ly-as-2866876>browser. Please</ly-as-2866876> <a href="http://browsehappy.com/"><ly-as-2866877>upgrade your browser</ly-as-2866877></a> <ly-as-2866878>or</ly-as-2866878> <a href="http://www.google.com/chromeframe/?redirect=true"><ly-as-2866879>activate Google Chrome Frame</ly-as-2866879></a> <ly-as-2866880>to improve your experience.</ly-as-2866880></p>
     <![endif]-->
     
-  {{ 'shop.js'  | asset_url | script_tag }}
-  {{ 'tether.min.js' | asset_url | script_tag }}
-  {{ 'bootstrap.min.js' | asset_url | script_tag }}
-  {{ 'scripts.js' | asset_url | script_tag }}
+  {% comment %}ly_asset_replace_for_[ 'shop.js'  | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'shop.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% comment %}ly_asset_replace_for_[ 'tether.min.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'tether.min.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% comment %}ly_asset_replace_for_[ 'bootstrap.min.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'bootstrap.min.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
+  {% comment %}ly_asset_replace_for_[ 'scripts.js' | asset_url | script_tag ]_begin{% endcomment %}{% assign ly_asset = 'scripts.js' %}{% include 'ly-asset' with ly_asset %}{{ ly_translation  | script_tag }}{% comment %}ly_asset_replace_end{% endcomment %}
 
 <script src="//www.codeblackbelt.com/js/modules/also-bought/main.min.js?shop=chrrroma.myshopify.com"></script>
-</body>
-</html>
+{% comment %}ly_static_code_begin{% endcomment %}{% include 'ly-languages' %}{% comment %}ly_static_code_end{% endcomment %}</body>
+</html>{% comment %}ly_static_code_begin{% endcomment %}{% endcapture %}{% include 'ly-static' with ly_content %}{% comment %}ly_static_code_end{% endcomment %}
